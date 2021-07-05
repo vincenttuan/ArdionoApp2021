@@ -6,7 +6,7 @@ fun main() {
     // 數組陣列
     val num1 = arrayOf(1, 5, "7", 3.0) // 隱式
     val num2 = arrayOf<Int>(1, 5, 7, 3) // 顯式
-    // for-loop
+    // for-loop 印出(走訪)每一個元素
     for(i in 0..num1.size-1) {
         println(num1[i])
     }
@@ -21,4 +21,8 @@ fun main() {
     println(num3.contentToString())
     val num4 = Array(5) { i -> i * 1 }
     println(num4.contentToString())
+    // 使用 lambda 語法印出(走訪)每一個元素
+    num4.forEach { n -> println("n = ${n}") }
+    num4.forEach { println(it) }
+
 }
