@@ -19,5 +19,20 @@ fun main() {
     println(person!!.name) // 忽略 null 值的警告, 最好要配合 try-catch
     println("----------------------------")
     // 請問平均年齡幾歲 ?
-
+    var sum = 0
+    people.forEach { sum+=it.age }
+    var avg = sum / people.size
+    println(avg)
+    println("----------------------------")
+    /*
+    * [Person(name=John, age=18), Person(name=Mary, age=19), Person(name=Helen, age=20)]
+    * mapToInt 轉換為 Int 元素
+    * [18, 19, 20]
+    * */
+    var avg2 = people.stream().mapToInt { it.age }.average().asDouble
+    println(avg2)
+    println("----------------------------")
+    val stat = people.stream().mapToInt { it.age }.summaryStatistics()
+    println("統計資訊：$stat")
+    println("平均：${stat.average}")
 }
