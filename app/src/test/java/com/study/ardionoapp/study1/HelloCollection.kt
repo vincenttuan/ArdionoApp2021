@@ -33,5 +33,5 @@ fun main() {
     println("$name 的長度 ${name.length}")
     // 動動腦 (請問誰的名字最長 ?)
     val names = setOf<String>("Helen", "John", "Jackson", "Anita")
-
+    println(names.maxByOrNull { it.length })
 }
