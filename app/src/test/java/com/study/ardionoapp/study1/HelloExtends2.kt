@@ -1,7 +1,7 @@
 package com.study.ardionoapp.study1
 
 // 抽象類別
-// 紅茶 10, 奶茶 25, 奶綠茶 25
+// 紅茶 10, 奶茶 25, 奶綠茶 30
 
 abstract class Tea(val name: String, val price: Int) {
     fun printTeaInfo() {
@@ -23,12 +23,14 @@ class MilkTea(name: String, price: Int): Tea(name, price) {
 }
 
 fun main() {
-    val redTea = RedTea("錫蘭紅茶", 20)
-    val milkTea = MilkTea("厚奶茶", 20)
-    val milkGeenTea = MilkTea("奶綠茶", 20)
+    val redTea = RedTea("錫蘭紅茶", 10)
+    val milkTea = MilkTea("厚奶茶", 25)
+    val milkGeenTea = MilkTea("奶綠茶", 30)
     val tea = listOf<Tea>(redTea, milkTea, milkGeenTea)
     tea.forEach { it.printIngredientsOfDrink() }
     tea.forEach { it.printTeaInfo() }
     tea.forEach { println(it.name) }
     tea.forEach { println(it.price) }
+    // 回家作業
+    // 請問平均價格 ?
 }
