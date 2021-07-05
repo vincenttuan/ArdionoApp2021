@@ -14,6 +14,6 @@ fun main() {
     println("圓面積 = %.2f".format(area))
     println("半徑 = %.1f, 圓面積 = %.2f".format(r, area))
     println("半徑 = $r, 圓面積 = $area")
-
-    // 球體積
+    // 球體積 公式: 4/3 * (pi * r的3次方)
+    // 請印出 半徑 = 10.5, 球體積 = ....
 }
