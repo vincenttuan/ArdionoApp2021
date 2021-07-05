@@ -1,7 +1,7 @@
 package com.study.ardionoapp.study1
 
 // 抽象類別
-// 紅茶 10, 奶茶 25
+// 紅茶 10, 奶茶 25, 奶綠茶 25
 
 abstract class Tea(val name: String, val price: Int) {
     fun printTeaInfo() {
