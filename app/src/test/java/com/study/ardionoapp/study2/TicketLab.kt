@@ -26,6 +26,16 @@ class Tickets(var oneWay: Int, var roundTrip: Int) {
 }
 
 fun main() {
+    print("請輸入購買張數:")
+    val allTickets = readLine()!!.toInt()
+    print("請輸入來回票組數:")
+    val roundTrip = readLine()!!.toInt()
+    val oneWay = allTickets - roundTrip*2
+    val tickets = Tickets(oneWay, roundTrip)
+    println("總票數：${allTickets} " +
+            "來回票: ${tickets.roundTrip} " +
+            "單程票: ${tickets.oneWay}" +
+            "總金額: ${tickets.total()}")
 
 }
 
