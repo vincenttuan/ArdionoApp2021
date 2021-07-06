@@ -153,4 +153,24 @@
 
     </LinearLayout>
 
+    <!-- 警告訊息 -->
+    <LinearLayout
+        android:layout_margin="15dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_warning"
+            android:text="None..."
+            android:textSize="20dp"
+            android:textColor="#ff0000"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:padding="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 </LinearLayout>
