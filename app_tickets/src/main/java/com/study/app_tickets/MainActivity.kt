@@ -32,5 +32,8 @@ class MainActivity : AppCompatActivity() {
                                 tickets.oneWay,
                                 tickets.total())
         tv_result.setText(result)
+        // update 剩餘張數
+        TicketsStock.subAmount(tickets.allTickets)
+        tv_total_amount.setText(TicketsStock.totalAmount.toString())
     }
 }
