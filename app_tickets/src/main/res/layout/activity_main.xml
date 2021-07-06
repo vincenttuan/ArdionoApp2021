@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/tv_total_amount"
-            android:text="20"
+            android:text="0"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="1"
@@ -52,7 +52,7 @@
         <EditText
             android:id="@+id/et_all_tickets"
             android:inputType="number"
-            android:text="5"
+            android:text="0"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="1"
@@ -80,7 +80,7 @@
         <EditText
             android:id="@+id/et_round_trip"
             android:inputType="number"
-            android:text="2"
+            android:text="0"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="1"
@@ -139,7 +139,7 @@
 
         <TextView
             android:id="@+id/tv_result"
-            android:text="總票數：5\n來回票：2\n單程票：1\n總金額：$4,600"
+            android:text="@string/tickets_result"
             android:textSize="30dp"
             android:gravity="left"
             android:layout_weight="1"
