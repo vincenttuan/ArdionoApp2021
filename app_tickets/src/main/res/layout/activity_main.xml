@@ -122,6 +122,8 @@
 
     <!-- 結帳資訊 -->
     <LinearLayout
+        android:layout_margin="15dp"
+        android:background="@drawable/border"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
