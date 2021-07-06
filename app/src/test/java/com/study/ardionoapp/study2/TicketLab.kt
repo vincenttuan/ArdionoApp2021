@@ -15,6 +15,15 @@ Round-trip: 2 (2000*2*0.9 = 3600)
 Total: 5600
 * */
 
+class TicketsStock {
+    companion object {
+        var totalAmount = 20
+        fun subAmount(amount: Int) {
+            totalAmount = totalAmount - amount
+        }
+    }
+}
+
 class Tickets(var allTickets: Int, var roundTrip: Int) {
     val price: Int = 1000
     val discountRate: Double = 0.9
@@ -30,6 +39,7 @@ class Tickets(var allTickets: Int, var roundTrip: Int) {
 }
 
 fun main() {
+    println("剩餘張數: ${ TicketsStock.totalAmount }")
     print("請輸入購買張數:")
     val allTickets = readLine()!!.toInt()
     print("請輸入來回票組數:")
@@ -40,6 +50,8 @@ fun main() {
             "來回票: ${tickets.roundTrip} " +
             "單程票: ${tickets.oneWay}" +
             "總金額: ${tickets.total()}")
-
+    //------------------------------------------
+    TicketsStock.subAmount(tickets.allTickets)
+    println("剩餘張數: ${ TicketsStock.totalAmount }")
 }
 
