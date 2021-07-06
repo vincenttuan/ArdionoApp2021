@@ -51,6 +51,7 @@
 
         <EditText
             android:id="@+id/et_all_tickets"
+            android:selectAllOnFocus="true"
             android:inputType="number"
             android:text="0"
             android:textSize="30dp"
@@ -79,6 +80,7 @@
 
         <EditText
             android:id="@+id/et_round_trip"
+            android:selectAllOnFocus="true"
             android:inputType="number"
             android:text="0"
             android:textSize="30dp"
