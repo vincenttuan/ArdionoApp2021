@@ -38,7 +38,7 @@ class Tickets(var allTickets: Int, var roundTrip: Int) {
     }
 }
 
-fun main() {
+fun buyTickets() {
     println("剩餘張數: ${ TicketsStock.totalAmount }")
     print("請輸入購買張數:")
     val allTickets = readLine()!!.toInt()
@@ -53,5 +53,17 @@ fun main() {
     //------------------------------------------
     TicketsStock.subAmount(tickets.allTickets)
     println("剩餘張數: ${ TicketsStock.totalAmount }")
+}
+
+fun main() {
+    while (true) {
+        buyTickets()
+        println("是否要繼續購買(1:繼續, 0:離開)？")
+        val exit = readLine()!!.toInt()
+        if(exit == 0) {
+            break
+        }
+    }
+    println("謝謝惠顧，再會 !")
 }
 
