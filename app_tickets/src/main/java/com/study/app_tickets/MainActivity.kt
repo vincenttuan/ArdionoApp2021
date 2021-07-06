@@ -18,6 +18,16 @@ class MainActivity : AppCompatActivity() {
     fun initUI() {
         // 配置剩餘張數
         tv_total_amount.setText(TicketsStock.totalAmount.toString())
+        // 清除結帳資訊
+        var result = resources.getString(R.string.tickets_result)
+        result = String.format(result, 0, 0, 0, 0)
+        tv_result.setText(result)
+    }
+
+    fun reset(view: View) {
+        initUI()
+        et_all_tickets.setText("0")
+        et_round_trip.setText("0")
     }
 
     fun buyTicket(view: View) {

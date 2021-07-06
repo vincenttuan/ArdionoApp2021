@@ -100,6 +100,7 @@
 
         <Button
             android:text="清除"
+            android:onClick="reset"
             android:textSize="30dp"
             android:textColor="#ffff00"
             android:backgroundTint="#005100"
