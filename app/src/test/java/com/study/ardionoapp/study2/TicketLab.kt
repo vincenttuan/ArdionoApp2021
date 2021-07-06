@@ -15,9 +15,13 @@ Round-trip: 2 (2000*2*0.9 = 3600)
 Total: 5600
 * */
 
-class Tickets(var oneWay: Int, var roundTrip: Int) {
+class Tickets(var allTickets: Int, var roundTrip: Int) {
     val price: Int = 1000
     val discountRate: Double = 0.9
+    var oneWay: Int = 0
+    init {
+        oneWay = allTickets - roundTrip * 2
+    }
     fun total(): Int {
         // 單程票價1000元，來回票為2000元再打九折
         val total = oneWay * price + (roundTrip * (price * 2)) * discountRate
@@ -30,9 +34,9 @@ fun main() {
     val allTickets = readLine()!!.toInt()
     print("請輸入來回票組數:")
     val roundTrip = readLine()!!.toInt()
-    val oneWay = allTickets - roundTrip*2
-    val tickets = Tickets(oneWay, roundTrip)
-    println("總票數：${allTickets} " +
+    //------------------------------------------
+    val tickets = Tickets(allTickets, roundTrip)
+    println("總票數：${tickets.allTickets} " +
             "來回票: ${tickets.roundTrip} " +
             "單程票: ${tickets.oneWay}" +
             "總金額: ${tickets.total()}")
