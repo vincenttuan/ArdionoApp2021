@@ -97,7 +97,37 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:text="清除"
+            android:textSize="30dp"
+            android:textColor="#ffff00"
+            android:backgroundTint="#005100"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
             android:text="購買結帳"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!-- 結帳資訊 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="結帳資訊"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="1"
@@ -105,7 +135,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_result"
+            android:text="總票數：5\n來回票：2\n單程票：1\n總金額：$4,600"
+            android:textSize="30dp"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:padding="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+    </LinearLayout>
 
 </LinearLayout>
