@@ -44,7 +44,18 @@ fun buyTickets() {
     val allTickets = readLine()!!.toInt()
     print("請輸入來回票組數:")
     val roundTrip = readLine()!!.toInt()
-    //------------------------------------------
+    //-----------------------------------------------------------------------------
+    // 購買張數不可大於剩餘張數
+    if(allTickets > TicketsStock.totalAmount) {
+        println("購買張數: ${allTickets} 不可大於剩餘張數: ${TicketsStock.totalAmount}")
+        return
+    }
+    // 來回組數的票數不可以大於總購買張數
+    if(roundTrip * 2 > allTickets) {
+        println("來回組數的票數: ${roundTrip * 2} 不可以大於總購買張數: ${allTickets}")
+        return
+    }
+    //-----------------------------------------------------------------------------
     val tickets = Tickets(allTickets, roundTrip)
     println("總票數：${tickets.allTickets} " +
             "來回票: ${tickets.roundTrip} " +
@@ -58,7 +69,7 @@ fun buyTickets() {
 fun main() {
     while (true) {
         buyTickets()
-        println("是否要繼續購買(1:繼續, 0:離開)？")
+        print("是否要繼續購買(1:繼續, 0:離開)？")
         val exit = readLine()!!.toInt()
         if(exit == 0) {
             break
