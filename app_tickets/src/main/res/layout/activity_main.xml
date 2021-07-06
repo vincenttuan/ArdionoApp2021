@@ -110,6 +110,7 @@
 
         <Button
             android:text="購買結帳"
+            android:onClick="buyTicket"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="1"

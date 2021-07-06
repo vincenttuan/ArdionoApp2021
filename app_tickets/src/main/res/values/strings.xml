@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">App_Tickets</string>
-    <string name="tickets_result">總票數：0\n來回票：0\n單程票：0\n總金額：$0</string>
+    <string name="tickets_result">總票數：%d\n來回票：%d\n單程票：%d\n總金額：$%,d</string>
 </resources>
