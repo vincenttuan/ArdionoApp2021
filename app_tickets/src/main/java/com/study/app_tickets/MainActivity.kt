@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var context: Context
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initUI() {
         // 配置剩餘張數
+        //val tv_total_amount = findViewById<TextView>(R.id.tv_total_amount)
         tv_total_amount.setText(TicketsStock.totalAmount.toString())
         // 清除結帳資訊
         var result = resources.getString(R.string.tickets_result)
