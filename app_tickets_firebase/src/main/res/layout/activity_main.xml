@@ -172,10 +172,22 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:backgroundTint="#0000ff"
+            android:gravity="center"
+            android:onClick="recordTicket"
+            android:padding="10dp"
+            android:text="紀錄"
+            android:textSize="25dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:onClick="buyTicket"
             android:padding="10dp"
-            android:text="購買結帳"
+            android:text="購買"
             android:textSize="25dp" />
 
     </LinearLayout>
