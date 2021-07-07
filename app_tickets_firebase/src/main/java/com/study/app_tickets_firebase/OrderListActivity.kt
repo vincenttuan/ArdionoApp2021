@@ -19,6 +19,7 @@ class OrderListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_order_list)
         // 取得上一頁傳來的 userName 參數資料
         userName = intent.getStringExtra("userName").toString()
+        title = "Hi " + userName + " 的雲端購票紀錄"
         // Read from the database
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

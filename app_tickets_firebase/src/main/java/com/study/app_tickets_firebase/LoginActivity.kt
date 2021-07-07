@@ -13,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         context = this
+        title = "雲端購票 - 登入"
     }
 
     fun login(view: View) {
