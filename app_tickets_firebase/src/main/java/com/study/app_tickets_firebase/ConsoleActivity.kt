@@ -1,8 +1,10 @@
 package com.study.app_tickets_firebase
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -14,11 +16,11 @@ import kotlinx.android.synthetic.main.activity_order_list.*
 class ConsoleActivity : AppCompatActivity() {
     val database = Firebase.database
     val myRef = database.getReference("ticketsStock")
-
+    lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_console)
-
+        context = this
         // Read from the database
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -44,5 +46,6 @@ class ConsoleActivity : AppCompatActivity() {
             "totalAmount" -> value = et_total_amount.text.toString().toDouble()
         }
         myRef.child(tag).setValue(value)
+        Toast.makeText(context, tag + " 修改成功", Toast.LENGTH_SHORT).show()
     }
 }
