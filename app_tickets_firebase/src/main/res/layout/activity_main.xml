@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/tv_ticket_discount"
+                android:id="@+id/tv_ticket_discount_rate"
                 android:text="9"
                 android:textSize="15dp"
                 android:padding="10dp"
