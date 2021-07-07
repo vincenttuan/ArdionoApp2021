@@ -1,6 +1,7 @@
 package com.study.app_tickets_firebase
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -135,5 +136,9 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(context, "購買成功 !", Toast.LENGTH_SHORT).show()
     }
 
+    fun recordTicket(view: View) {
+        val intent = Intent(context, OrderListActivity::class.java)
+        startActivity(intent)
+    }
 
 }
