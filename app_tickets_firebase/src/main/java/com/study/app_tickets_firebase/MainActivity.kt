@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         context = this
         userName = "John"
+        // 修改 Title
+        title = "Hi " + userName + " 的雲端購票"
         // Read from the database
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -138,6 +140,8 @@ class MainActivity : AppCompatActivity() {
 
     fun recordTicket(view: View) {
         val intent = Intent(context, OrderListActivity::class.java)
+        // 設定 userName 參數資料給指定頁 (Ex:OrderListActivity)
+        intent.putExtra("userName", userName)
         startActivity(intent)
     }
 
