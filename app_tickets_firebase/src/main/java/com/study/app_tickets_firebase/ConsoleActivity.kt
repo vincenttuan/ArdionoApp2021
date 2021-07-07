@@ -2,6 +2,7 @@ package com.study.app_tickets_firebase
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -33,5 +34,15 @@ class ConsoleActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
+    }
+    fun update(view: View) {
+        val tag = view.tag.toString()
+        var value = 0.0
+        when(tag) {
+            "discount" -> value = et_discount.text.toString().toDouble()
+            "price"    -> value = et_price.text.toString().toDouble()
+            "totalAmount" -> value = et_total_amount.text.toString().toDouble()
+        }
+        myRef.child(tag).setValue(value)
     }
 }
