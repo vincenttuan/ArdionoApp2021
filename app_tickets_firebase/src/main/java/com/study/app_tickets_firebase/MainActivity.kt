@@ -138,6 +138,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(context, "購買成功 !", Toast.LENGTH_SHORT).show()
     }
 
+    // 檢視訂單記錄
     fun recordTicket(view: View) {
         val intent = Intent(context, OrderListActivity::class.java)
         // 設定 userName 參數資料給指定頁 (Ex:OrderListActivity)
