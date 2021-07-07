@@ -12,16 +12,19 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val database = Firebase.database
     val myRef = database.getReference("ticketsStock")
     lateinit var context: Context
-
+    lateinit var userName: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         context = this
+        userName = "John"
         // Read from the database
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -103,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         val roundTrip  = et_round_trip.text.toString().toInt()
 
         // 進行票務處理
-        val tickets = Tickets(allTickets, roundTrip)
+        val tickets = Tickets(userName, allTickets, roundTrip)
         //  result = 總票數：%d\n來回票：%d\n單程票：%d\n總金額：$%,d
         var result = resources.getString(R.string.tickets_result)
         result = String.format(result,
@@ -116,6 +119,15 @@ class MainActivity : AppCompatActivity() {
         // 通知 firebase 變更 totalAmount 剩餘張數 ------------------
         val amount = TicketsStock.totalAmount - tickets.allTickets
         myRef.child("totalAmount").setValue(amount)
+        // 通知 firebase 紀錄訂單資料 ------------------
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val orderTimeString = sdf.format(Date())
+        val subPath = "orders/" + userName + "/" + orderTimeString + "/"
+        myRef.child(subPath + "allTickets").setValue(tickets.allTickets)
+        myRef.child(subPath + "roundTrip").setValue(tickets.roundTrip)
+        myRef.child(subPath + "oneWay").setValue(tickets.oneWay)
+        myRef.child(subPath + "total").setValue(tickets.total())
+
 
         // 購買成功訊息
         tv_warning.setText("購買成功 !")
