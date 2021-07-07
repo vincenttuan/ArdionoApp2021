@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         context = this
-        userName = "John"
+        userName = intent.getStringExtra("userName").toString()
         // 修改 Title
         title = "Hi " + userName + " 的雲端購票"
         // Read from the database
