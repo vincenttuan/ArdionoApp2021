@@ -22,4 +22,8 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("userName", userName)
         startActivity(intent)
     }
+
+    fun consoleLogin(view: View) {
+
+    }
 }
