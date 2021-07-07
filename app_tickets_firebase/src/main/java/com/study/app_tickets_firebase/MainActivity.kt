@@ -111,9 +111,11 @@ class MainActivity : AppCompatActivity() {
             tickets.oneWay,
             tickets.total())
         tv_result.setText(result)
-        // update 剩餘張數
-        TicketsStock.subAmount(tickets.allTickets)
-        tv_total_amount.setText(TicketsStock.totalAmount.toString())
+
+        // 通知 firebase 變更 totalAmount 剩餘張數 ------------------
+        val amount = TicketsStock.totalAmount - tickets.allTickets
+        myRef.child("totalAmount").setValue(amount)
+
         // 購買成功訊息
         tv_warning.setText("購買成功 !")
         Toast.makeText(context, "購買成功 !", Toast.LENGTH_SHORT).show()
