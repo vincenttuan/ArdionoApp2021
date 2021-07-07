@@ -24,6 +24,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun consoleLogin(view: View) {
-
+        
     }
 }
