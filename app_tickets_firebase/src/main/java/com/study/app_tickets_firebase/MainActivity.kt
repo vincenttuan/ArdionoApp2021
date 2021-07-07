@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         refreshUI()
         et_all_tickets.setText("0")
         et_round_trip.setText("0")
+        tv_warning.setText("")
     }
 
     // 驗證購票欄位
