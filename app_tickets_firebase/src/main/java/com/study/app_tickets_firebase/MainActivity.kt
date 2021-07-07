@@ -119,6 +119,7 @@ class MainActivity : AppCompatActivity() {
         // 通知 firebase 變更 totalAmount 剩餘張數 ------------------
         val amount = TicketsStock.totalAmount - tickets.allTickets
         myRef.child("totalAmount").setValue(amount)
+
         // 通知 firebase 紀錄訂單資料 ------------------
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val orderTimeString = sdf.format(Date())
