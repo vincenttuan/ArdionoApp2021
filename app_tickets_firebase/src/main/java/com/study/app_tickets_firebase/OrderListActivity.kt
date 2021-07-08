@@ -85,7 +85,11 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
         alert.setTitle("退票")
         alert.setMessage("$key 是否要退票 ?")
         alert.setPositiveButton("是") { dialog, which ->
+                // 刪除訂單記錄
                 myRef.child("orders/" + userName + "/" + key).removeValue()
+                // 票數加回
+                // 從 order.allTickets 加回到 firebase's totalAmount 欄位中
+
         }
         alert.setNegativeButton("否", null)
         alert.show()
