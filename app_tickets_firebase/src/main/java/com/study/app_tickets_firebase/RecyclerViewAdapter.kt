@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.order.view.*
 
 // 適配器(配置每一筆紀錄的擺放方式)
-class RecyclerViewAdapter(): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
+class RecyclerViewAdapter(val listener: RowOnItemClickListener): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
     var orderList: List<Order> = ArrayList<Order>()
     fun setOrders(orderList: List<Order>) {
         this.orderList = orderList
     }
+
     // View 配置方式
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val allTickets = view.tv_allTickets
@@ -33,10 +34,17 @@ class RecyclerViewAdapter(): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHold
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            listener.onItemClickListener(orderList[position])
+        }
         holder.bind(orderList[position])
     }
 
     override fun getItemCount(): Int {
         return orderList.size
+    }
+
+    interface RowOnItemClickListener {
+        fun onItemClickListener(order: Order)
     }
 }

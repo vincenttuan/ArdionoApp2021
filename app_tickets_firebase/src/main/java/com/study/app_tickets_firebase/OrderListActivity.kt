@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_order_list.*
 
-class OrderListActivity : AppCompatActivity() {
+class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClickListener {
     val database = Firebase.database
     val myRef = database.getReference("ticketsStock")
     lateinit var userName: String
@@ -25,6 +26,7 @@ class OrderListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_list)
         context = this
+
         // 取得上一頁傳來的 userName 參數資料
         userName = intent.getStringExtra("userName").toString()
         title = "Hi " + userName + " 的雲端購票紀錄"
@@ -66,13 +68,19 @@ class OrderListActivity : AppCompatActivity() {
         // init recycler view
         recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
-            recyclerViewAdapter = RecyclerViewAdapter()
+            recyclerViewAdapter = RecyclerViewAdapter(this@OrderListActivity)
             adapter = recyclerViewAdapter
             // 分隔線
             val divider = DividerItemDecoration(context, StaggeredGridLayoutManager.VERTICAL)
             addItemDecoration(divider)
         }
 
+    }
+
+    override fun onItemClickListener(order: Order) {
+        val key = order.key
+        myRef.child("orders/" + userName + "/" + key).removeValue()
+        //Toast.makeText(context, order.toString(), Toast.LENGTH_SHORT).show()
     }
 
 }
