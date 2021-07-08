@@ -3,6 +3,10 @@ package com.study.app_tickets_firebase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -14,6 +18,7 @@ class OrderListActivity : AppCompatActivity() {
     val database = Firebase.database
     val myRef = database.getReference("ticketsStock")
     lateinit var userName: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_list)
@@ -24,15 +29,20 @@ class OrderListActivity : AppCompatActivity() {
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
+                var items = mutableListOf("demo")
                 children.forEach {
                     if(it.key.toString() == "orders") {
                         tv_info.setText(it.child(userName).toString())
+
                     }
                 }
+
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
 
+
     }
+
 }
