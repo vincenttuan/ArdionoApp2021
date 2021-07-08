@@ -82,8 +82,8 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
     override fun onItemClickListener(order: Order) {
         val key = order.key
         val alert = AlertDialog.Builder(context)
-        alert.setTitle("刪除")
-        alert.setMessage("$key 是否要刪除 ?")
+        alert.setTitle("退票")
+        alert.setMessage("$key 是否要退票 ?")
         alert.setPositiveButton("是") { dialog, which ->
                 myRef.child("orders/" + userName + "/" + key).removeValue()
         }
