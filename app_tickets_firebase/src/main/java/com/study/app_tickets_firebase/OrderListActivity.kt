@@ -32,14 +32,19 @@ class OrderListActivity : AppCompatActivity() {
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
-                var items = mutableListOf("demo")
+                val orderList = mutableListOf<String>(userName)
                 children.forEach {
                     if(it.key.toString() == "orders") {
                         tv_info.setText(it.child(userName).toString())
-
+                        it.child(userName).children.forEach {
+                            orderList.add(it.toString())
+                        }
                     }
                 }
-
+                // 更新 recycler view 的資訊
+                recyclerViewAdapter.setOrders(orderList)
+                // 通知 UI 變更
+                recyclerViewAdapter.notifyDataSetChanged()
             }
             override fun onCancelled(error: DatabaseError) {
             }
