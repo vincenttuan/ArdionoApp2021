@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -31,12 +32,12 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
         userName = intent.getStringExtra("userName").toString()
         title = "Hi " + userName + " 的雲端購票紀錄"
         // Read from the database
-        myRef.addValueEventListener(object: ValueEventListener {
+        myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
                 val orderList = mutableListOf<Order>()
                 children.forEach {
-                    if(it.key.toString() == "orders") {
+                    if (it.key.toString() == "orders") {
                         tv_info.setText(it.child(userName).toString())
                         it.child(userName).children.forEach {
                             try {
@@ -61,6 +62,7 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
                 // 通知 UI 變更
                 recyclerViewAdapter.notifyDataSetChanged()
             }
+
             override fun onCancelled(error: DatabaseError) {
             }
         })
@@ -79,7 +81,14 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
 
     override fun onItemClickListener(order: Order) {
         val key = order.key
-        myRef.child("orders/" + userName + "/" + key).removeValue()
+        val alert = AlertDialog.Builder(context)
+        alert.setTitle("刪除")
+        alert.setMessage("$key 是否要刪除 ?")
+        alert.setPositiveButton("是") { dialog, which ->
+                myRef.child("orders/" + userName + "/" + key).removeValue()
+        }
+        alert.setNegativeButton("否", null)
+        alert.show()
         //Toast.makeText(context, order.toString(), Toast.LENGTH_SHORT).show()
     }
 
