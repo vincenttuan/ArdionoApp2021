@@ -32,12 +32,20 @@ class OrderListActivity : AppCompatActivity() {
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
-                val orderList = mutableListOf<String>()
+                val orderList = mutableListOf<Order>()
                 children.forEach {
                     if(it.key.toString() == "orders") {
                         tv_info.setText(it.child(userName).toString())
                         it.child(userName).children.forEach {
-                            orderList.add(it.toString())
+                            val order = Order(
+                                userName,
+                                it.key.toString(),
+                                it.child("allTickets").value.toString().toInt(),
+                                it.child("roundTrip").value.toString().toInt(),
+                                it.child("oneWay").value.toString().toInt(),
+                                it.child("total").value.toString().toInt()
+                            )
+                            orderList.add(order)
                         }
                     }
                 }
