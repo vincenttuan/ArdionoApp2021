@@ -33,7 +33,11 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
 
         // 取得上一頁傳來的 userName 參數資料
         userName = intent.getStringExtra("userName").toString()
-        title = "Hi " + userName + " 的雲端購票紀錄"
+        if (userName == null || userName.equals("") || userName.equals("null")) {
+            title = "雲端購票全紀錄"
+        } else {
+            title = "Hi " + userName + " 的雲端購票紀錄"
+        }
         // Read from the database
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
