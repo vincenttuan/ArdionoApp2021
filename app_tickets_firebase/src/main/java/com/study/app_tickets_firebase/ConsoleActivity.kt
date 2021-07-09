@@ -103,7 +103,8 @@ class ConsoleActivity : AppCompatActivity() {
         webSettings.setBuiltInZoomControls(true); // 啟用 Zoom
         var asset_path = "file:///android_asset/";
         var html = getHtml("chart.html");
-        html = String.format(html!!, 10, 20, 30, 40, 50)
+        var rowDataByChart = "['Anita', 12480],['Helen', 67480],['John', 20800],['Vincent', 12740],['admin', 8320],"
+        html = String.format(html!!, rowDataByChart)
         web_view.loadDataWithBaseURL(asset_path, html!!, "text/html", "utf-8", null);
         web_view.requestFocusFromTouch();
     }
