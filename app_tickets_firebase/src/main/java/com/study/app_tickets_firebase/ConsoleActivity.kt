@@ -1,6 +1,7 @@
 package com.study.app_tickets_firebase
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -92,7 +93,10 @@ class ConsoleActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            1 -> {} // "訂單細目"
+            1 -> {
+                val intent = Intent(context, OrderListActivity::class.java)
+                startActivity(intent)
+            } // "訂單細目"
             2 -> finish() // "返回"
         }
         return super.onOptionsItemSelected(item)
