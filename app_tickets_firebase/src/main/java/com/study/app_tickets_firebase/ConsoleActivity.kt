@@ -81,29 +81,38 @@ class ConsoleActivity : AppCompatActivity() {
                     }
                 }
 
-                Log.d("ConsoleActivity", statListByUser.toString())
-
                 // 顯示統計資料
                 tv_stat.text = "總賣票數：${String.format("%,d", sumAllTickets)} 張\n" +
                                "總單程票：${String.format("%,d", sumOneWay)} 張\n" +
                                "總來回票：${String.format("%,d", sumRoundTrip * 2)} 張 （${String.format("%,d", sumRoundTrip)} 組）\n" +
                                "總銷售金額：$${String.format("%,d", sumTotal)} 元"
+
+                Log.d("ConsoleActivity", statListByUser.toString())
+                // 載入圖表
+                loadChart(statListByUser)
+
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
 
-        // 載入圖表
-        loadChart()
     }
 
-    fun loadChart() {
+    fun loadChart(statListByUser: List<Map<String, Int>>) {
+        // ['Anita', 12480], ...
+        var rowDataByChart: String = ""
+        statListByUser.forEach {
+            val key = it.keys.iterator().next()
+            val value = it[key]
+            rowDataByChart += "['$key', $value],"
+        }
+        Log.d("ConsoleActivity", rowDataByChart)
+
         var webSettings =  web_view.settings;
         webSettings.setJavaScriptEnabled(true); // 啟用 Javascript
         webSettings.setBuiltInZoomControls(true); // 啟用 Zoom
         var asset_path = "file:///android_asset/";
         var html = getHtml("chart.html");
-        var rowDataByChart = "['Anita', 12480],['Helen', 67480],['John', 20800],['Vincent', 12740],['admin', 8320],"
         html = String.format(html!!, rowDataByChart)
         web_view.loadDataWithBaseURL(asset_path, html!!, "text/html", "utf-8", null);
         web_view.requestFocusFromTouch();
