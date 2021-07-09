@@ -28,7 +28,7 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_list)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         context = this
 
         // 取得上一頁傳來的 userName 參數資料
