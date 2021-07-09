@@ -112,8 +112,16 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
             myRef.child("orders/" + order.userName + "/" + key).removeValue()
             // 票數加回
             // 從 order.allTickets 加回到 firebase's totalAmount 欄位中
-            val returnTickets = TicketsStock.totalAmount + order.allTickets
-            myRef.child("totalAmount").setValue(returnTickets)
+            myRef.child("totalAmount").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val returnTickets = snapshot.getValue().toString().toInt() + order.allTickets
+                    myRef.child("totalAmount").setValue(returnTickets)
+                }
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+
 
         }
         alert.setNegativeButton("否", null)
