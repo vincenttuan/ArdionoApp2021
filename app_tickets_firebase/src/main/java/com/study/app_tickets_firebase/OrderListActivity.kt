@@ -1,6 +1,7 @@
 package com.study.app_tickets_firebase
 
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_order_list.*
+import kotlinx.android.synthetic.main.order.*
 
 class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClickListener {
     val database = Firebase.database
@@ -97,14 +99,15 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
             }
         })
 
+
         // init recycler view
         recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
             recyclerViewAdapter = RecyclerViewAdapter(this@OrderListActivity)
             adapter = recyclerViewAdapter
             // 分隔線
-            val divider = DividerItemDecoration(context, StaggeredGridLayoutManager.VERTICAL)
-            addItemDecoration(divider)
+            //val divider = DividerItemDecoration(context, StaggeredGridLayoutManager.VERTICAL)
+            //addItemDecoration(divider)
         }
 
     }
