@@ -59,7 +59,10 @@ class ConsoleActivity : AppCompatActivity() {
                 }
 
                 // 顯示統計資料
-
+                tv_stat.text = "總賣票數：${String.format("%,d", sumAllTickets)} 張\n" +
+                               "總單程票：${String.format("%,d", sumOneWay)} 張\n" +
+                               "總來回票：${String.format("%,d", sumRoundTrip)} 組\n" +
+                               "總銷售金額：$${String.format("%,d", sumTotal)} 元"
             }
             override fun onCancelled(error: DatabaseError) {
             }
