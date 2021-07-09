@@ -49,6 +49,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        //  result = 總票數：%d\n來回票：%d\n單程票：%d\n總金額：$%,d
+        var result = resources.getString(R.string.tickets_result)
+        tv_result.setText(String.format(result, 0, 0, 0, 0))
 
     }
 
