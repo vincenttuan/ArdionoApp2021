@@ -42,9 +42,9 @@ class ConsoleActivity : AppCompatActivity() {
                         "orders" -> {
                             it.children.forEach { // 訂購人
                                 it.children.forEach { // 訂票日期
-                                    it.children.forEach {
+                                    it.children.forEach { // 訂票內容
                                         //Log.d("MainActivity", it.key.toString())
-                                        when(it.key.toString()) {
+                                        when(it.key.toString()) { // 項目
                                             "allTickets" -> sumAllTickets += it.value.toString().toInt()
                                             "oneWay" -> sumOneWay += it.value.toString().toInt()
                                             "roundTrip" -> sumRoundTrip += it.value.toString().toInt()
