@@ -1,4 +1,4 @@
-package com.study.ardionoapp
+package com.study.app_iot
 
 import org.junit.Test
 
