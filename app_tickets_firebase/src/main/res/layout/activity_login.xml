@@ -15,7 +15,7 @@
 
     <EditText
         android:id="@+id/et_username"
-        android:text="John"
+        android:text="admin"
         android:hint="請輸入帳號"
         android:textSize="30dp"
         android:padding="20dp"

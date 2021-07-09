@@ -3,6 +3,7 @@ package com.study.app_tickets_firebase
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
@@ -27,18 +28,43 @@ class ConsoleActivity : AppCompatActivity() {
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
+                var sumAllTickets = 0
+                var sumOneWay = 0
+                var sumRoundTrip = 0
+                var sumTotal = 0
+
                 children.forEach {
                     when(it.key.toString()) {
                         "discount" -> et_discount.setText(it.value.toString())
                         "price" -> et_price.setText(it.value.toString())
                         "totalAmount" -> et_total_amount.setText(it.value.toString())
+                        // 訂單明細
+                        "orders" -> {
+                            it.children.forEach { // 訂購人
+                                it.children.forEach { // 訂票日期
+                                    it.children.forEach {
+                                        //Log.d("MainActivity", it.key.toString())
+                                        when(it.key.toString()) {
+                                            "allTickets" -> sumAllTickets += it.value.toString().toInt()
+                                            "oneWay" -> sumOneWay += it.value.toString().toInt()
+                                            "roundTrip" -> sumRoundTrip += it.value.toString().toInt()
+                                            "total" -> sumTotal += it.value.toString().toInt()
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+
+                // 顯示統計資料
+
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
     }
+
     fun update(view: View) {
         val tag = view.tag.toString()
         var value = 0.0
