@@ -9,7 +9,7 @@
         android:roundIcon="@drawable/ticket"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArdionoApp">
-        <activity android:name=".ConsoleActivity"></activity>
+        <activity android:name=".ConsoleActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".OrderListActivity" />
         <activity android:name=".LoginActivity">

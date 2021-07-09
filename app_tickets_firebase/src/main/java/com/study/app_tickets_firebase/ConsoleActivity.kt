@@ -25,6 +25,7 @@ class ConsoleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_console)
+
         context = this
         title = "雲端購票 - 後台"
         // Read from the database
