@@ -3,6 +3,7 @@ package com.study.app_tickets_firebase
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -39,6 +40,9 @@ class ConsoleActivity : AppCompatActivity() {
                 var sumOneWay = 0
                 var sumRoundTrip = 0
                 var sumTotal = 0
+                // 個別訂購人的統計資料列表
+                // [{"Anita": 10000}, {"Helen": 8000}, {"John":50000} ...]
+                var statListByUser = mutableListOf<Map<String, Int>>()
 
                 children.forEach {
                     when(it.key.toString()) {
@@ -48,6 +52,12 @@ class ConsoleActivity : AppCompatActivity() {
                         // 訂單明細
                         "orders" -> {
                             it.children.forEach { // 訂購人
+                                // 取得當前訂購人的訂購總金額
+                                var mapUser = mutableMapOf<String, Int>()
+                                // 當前訂購人姓名
+                                val mapUserName = it.key.toString()
+                                // 預設訂購總金額 = 0
+                                mapUser.put(mapUserName, 0)
                                 it.children.forEach { // 訂票日期
                                     it.children.forEach { // 訂票內容
                                         //Log.d("MainActivity", it.key.toString())
@@ -55,14 +65,23 @@ class ConsoleActivity : AppCompatActivity() {
                                             "allTickets" -> sumAllTickets += it.value.toString().toInt()
                                             "oneWay" -> sumOneWay += it.value.toString().toInt()
                                             "roundTrip" -> sumRoundTrip += it.value.toString().toInt()
-                                            "total" -> sumTotal += it.value.toString().toInt()
+                                            "total" -> {
+                                                val total = it.value.toString().toInt()
+                                                sumTotal += total
+                                                // 累計當前訂購人的訂購總金額
+                                                mapUser.put(mapUserName, mapUser.get(mapUserName)!! + total)
+                                            }
                                         }
                                     }
                                 }
+                                // 將訂購人訂購總金額放入「個別訂購人的統計資料列表」
+                                statListByUser.add(mapUser)
                             }
                         }
                     }
                 }
+
+                Log.d("ConsoleActivity", statListByUser.toString())
 
                 // 顯示統計資料
                 tv_stat.text = "總賣票數：${String.format("%,d", sumAllTickets)} 張\n" +
