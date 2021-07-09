@@ -28,6 +28,7 @@ class ConsoleActivity : AppCompatActivity() {
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
+                // 統計資料累計
                 var sumAllTickets = 0
                 var sumOneWay = 0
                 var sumRoundTrip = 0
