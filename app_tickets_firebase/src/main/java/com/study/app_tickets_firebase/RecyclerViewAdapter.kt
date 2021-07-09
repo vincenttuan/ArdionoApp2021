@@ -15,11 +15,13 @@ class RecyclerViewAdapter(val listener: RowOnItemClickListener): RecyclerView.Ad
 
     // View 配置方式
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val userName   = view.tv_userName
         val allTickets = view.tv_allTickets
         val roundTrip  = view.tv_roundTrip
         val oneWay     = view.tv_oneWay
         val total      = view.tv_total
         fun bind(order: Order) {
+            userName.text   = order.userName
             allTickets.text = order.allTickets.toString()
             roundTrip.text  = order.roundTrip.toString()
             oneWay.text     = order.oneWay.toString()
