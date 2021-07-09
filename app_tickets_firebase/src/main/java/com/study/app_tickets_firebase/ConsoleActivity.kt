@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
@@ -80,4 +82,15 @@ class ConsoleActivity : AppCompatActivity() {
         myRef.child(tag).setValue(value)
         Toast.makeText(context, tag + " 修改成功", Toast.LENGTH_SHORT).show()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menu?.add("訂單細目")
+        menu?.add("離開")
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
+
 }
