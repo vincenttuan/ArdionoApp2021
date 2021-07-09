@@ -84,12 +84,17 @@ class ConsoleActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menu?.add("訂單細目")
-        menu?.add("離開")
+        // 1, 1, 10, "訂單細目" -> group id, item id, order id, 名稱
+        menu?.add(0, 1, 10, "訂單細目")?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+        menu?.add(0, 2, 20, "返回")?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            1 -> {} // "訂單細目"
+            2 -> finish() // "返回"
+        }
         return super.onOptionsItemSelected(item)
     }
 
