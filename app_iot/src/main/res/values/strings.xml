@@ -7,6 +7,6 @@
         https://api.openweathermap.org/data/2.5/weather?q=%s,%s&amp;appid=%s
     </string>
     <string name="open_weather_icon_url">
-        https://openweathermap.org/img/wn/%s@2x.png
+        https://openweathermap.org/img/wn/%s@4x.png
     </string>
 </resources>

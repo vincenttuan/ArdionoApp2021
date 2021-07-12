@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
+import com.google.gson.Gson
+import com.google.gson.JsonParser
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.*
@@ -36,6 +40,18 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call, response: Response) {
                     val json = response.body?.string()
                     Log.d("MainActivity", json.toString())
+                    val gson = Gson()
+                    val root = JsonParser.parseString(json).asJsonObject
+                    val weather = root.getAsJsonArray("weather")[0].asJsonObject
+                    val main = root.getAsJsonObject("main").asJsonObject
+                    var icon_url = resources.getString(R.string.open_weather_icon_url)
+                    icon_url = String.format(icon_url, weather.get("icon").asString)
+                    Log.d("MainActivity", icon_url)
+                    // UI 配置
+                    runOnUiThread {
+                        Picasso.get().load(icon_url).into(ib_icon);
+                        btn_message.text = weather.get("description").asString
+                    }
                 }
 
             })
