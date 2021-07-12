@@ -66,12 +66,14 @@
         android:layout_height="match_parent">
         <ImageButton
             android:id="@+id/ib_icon"
+            android:onClick="openWeatherOnClick"
             android:layout_weight="1"
             android:src="@drawable/weather_icon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <Button
             android:id="@+id/btn_message"
+            android:onClick="openWeatherOnClick"
             android:backgroundTint="#cccccc"
             android:textColor="@color/black"
             android:layout_weight="1"

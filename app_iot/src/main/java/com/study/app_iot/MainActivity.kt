@@ -3,6 +3,7 @@ package com.study.app_iot
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import com.google.gson.Gson
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        openWeatherOnClick(btn_message)
+    }
+
+    fun openWeatherOnClick(view: View) {
         GlobalScope.launch {
             val client = OkHttpClient()
             val area = "Taoyuan"
@@ -58,6 +63,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
+
         }
     }
+
 }
