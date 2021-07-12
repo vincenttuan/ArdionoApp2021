@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.study.app_tickets_firebase">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ticket"
@@ -10,10 +13,13 @@
         android:roundIcon="@drawable/ticket"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArdionoApp">
-        <activity android:name=".ConsoleActivity"
-                  android:parentActivityName=".LoginActivity" />
-        <activity android:name=".MainActivity"
-                  android:parentActivityName=".LoginActivity" />
+        <activity android:name=".QRCodeActivity"></activity>
+        <activity
+            android:name=".ConsoleActivity"
+            android:parentActivityName=".LoginActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".LoginActivity" />
         <activity android:name=".OrderListActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

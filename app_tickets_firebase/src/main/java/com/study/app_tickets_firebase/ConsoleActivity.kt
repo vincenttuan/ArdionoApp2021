@@ -149,7 +149,7 @@ class ConsoleActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // 1, 1, 10, "訂單細目" -> group id, item id, order id, 名稱
         menu?.add(0, 1, 10, "訂單細目")?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-        menu?.add(0, 2, 20, "orcode")?.setIcon(R.drawable.qrcode_icon)?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+        menu?.add(0, 2, 20, "[ -- ]")?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -157,6 +157,10 @@ class ConsoleActivity : AppCompatActivity() {
         when(item.itemId) {
             1 -> { // "訂單細目"
                 val intent = Intent(context, OrderListActivity::class.java)
+                startActivity(intent)
+            }
+            2 -> { // "Qrcode Activity"
+                val intent = Intent(context, QRCodeActivity::class.java)
                 startActivity(intent)
             }
         }
