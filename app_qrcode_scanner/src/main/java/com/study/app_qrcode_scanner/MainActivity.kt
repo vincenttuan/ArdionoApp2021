@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 val result_text = it.text
                 AlertDialog.Builder(context)
                     .setMessage("QRCode: $result_text")
+                    .setPositiveButton("Exit", DialogInterface.OnClickListener { dialogInterface, i -> finish() })
                     .create()
                     .show()
             }
