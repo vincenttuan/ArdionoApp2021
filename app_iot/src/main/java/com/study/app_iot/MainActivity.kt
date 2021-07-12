@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
             val key = resources.getString(R.string.open_weather_key)
             var base_url = resources.getString(R.string.open_weather_base_url)
             base_url = String.format(base_url, area, country, key)
+            Log.d("MainActivity", base_url)
+
             val request = Request.Builder()
                 .url(base_url)
                 .build()
@@ -32,8 +34,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    val json = response.body.toString()
-                    Log.d("MainActivity", json)
+                    val json = response.body?.string()
+                    Log.d("MainActivity", json.toString())
                 }
 
             })
