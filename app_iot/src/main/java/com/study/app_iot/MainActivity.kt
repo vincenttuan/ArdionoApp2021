@@ -6,6 +6,12 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.squareup.picasso.Picasso
@@ -16,10 +22,18 @@ import okhttp3.*
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
+    val database = Firebase.database
+    val buzeerRef = database.getReference("buzeer")
+    val cdsRef = database.getReference("cds")
+    val dht11Ref = database.getReference("dht11")
+    val doorRef = database.getReference("door")
+    val ledRef = database.getReference("led")
+    val logRef = database.getReference("log")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        intRef()
         openWeatherOnClick(btn_message)
     }
 
@@ -65,6 +79,20 @@ class MainActivity : AppCompatActivity() {
             })
 
         }
+    }
+
+
+    fun intRef() {
+
+
+        logRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.child("data").value.toString()
+                tv_log.text = value
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 
 }
