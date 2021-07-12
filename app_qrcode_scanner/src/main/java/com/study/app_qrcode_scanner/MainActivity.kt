@@ -21,12 +21,31 @@ class MainActivity : AppCompatActivity() {
 
         if(checkPermission()) {
             // 正常執行程式
+            runProgram()
         } else {
             // 啟動動態核准對話框
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.CAMERA),
                 PERMISSION_REQUEST_CODE)
 
+        }
+    }
+
+    fun runProgram() {
+        // 正常執行程式
+        title = "正常執行程式"
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == PERMISSION_REQUEST_CODE) {
+            // 正常執行程式
+            runProgram()
         }
     }
 
