@@ -3,9 +3,7 @@ package com.study.app_iot
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.view.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -29,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     val doorRef = database.getReference("door")
     val ledRef = database.getReference("led")
     val logRef = database.getReference("log")
+    val faceRef = database.getReference("face")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +80,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
 
     fun intRef() {
 
@@ -157,4 +155,15 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menu?.add("face")?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.title.equals("face")) {
+            faceRef.setValue(1)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
