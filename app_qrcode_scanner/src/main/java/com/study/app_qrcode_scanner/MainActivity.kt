@@ -43,11 +43,13 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         if(requestCode == PERMISSION_REQUEST_CODE) {
             // 正常執行程式
             runProgram()
         }
     }
+
 
     // 使用者是否有同意使用權限(Ex:Camera)
     private fun checkPermission(): Boolean {
