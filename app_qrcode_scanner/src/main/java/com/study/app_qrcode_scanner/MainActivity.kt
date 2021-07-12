@@ -10,10 +10,13 @@ import android.os.PatternMatcher
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.budiyev.android.codescanner.CodeScanner
 
 class MainActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_CODE = 200
-    lateinit var context: Context
+    private lateinit var context: Context
+    private lateinit var codeScanner: CodeScanner
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
