@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         intRef()
         openWeatherOnClick(btn_message)
     }
@@ -83,7 +84,6 @@ class MainActivity : AppCompatActivity() {
 
 
     fun intRef() {
-
 
         logRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
