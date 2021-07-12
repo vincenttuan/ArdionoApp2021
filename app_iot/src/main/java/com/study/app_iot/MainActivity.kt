@@ -85,6 +85,68 @@ class MainActivity : AppCompatActivity() {
 
     fun intRef() {
 
+        ledRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                ib_led_red.setImageResource(R.drawable.grey)
+                ib_led_green.setImageResource(R.drawable.grey)
+                ib_led_yellow.setImageResource(R.drawable.grey)
+                val value = snapshot.value.toString().toInt()
+                when(value) {
+                    1 -> ib_led_red.setImageResource(R.drawable.red)
+                    2 -> ib_led_green.setImageResource(R.drawable.green)
+                    3 -> ib_led_yellow.setImageResource(R.drawable.yellow)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        buzeerRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value.toString().toInt()
+                if(value == 1) {
+                    ib_warnning.setImageResource(R.drawable.buzeer_open)
+                } else {
+                    ib_warnning.setImageResource(R.drawable.buzeer_close)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        doorRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value.toString().toInt()
+                if(value == 1) {
+                    ib_door.setImageResource(R.drawable.door_open)
+                } else {
+                    ib_door.setImageResource(R.drawable.door_close)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        cdsRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value.toString()
+                tv_house_cds.text = value
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        dht11Ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val humi_value = snapshot.child("humi").value.toString()
+                val temp_value = snapshot.child("temp").value.toString()
+                tv_house_humi.text = humi_value + " %"
+                tv_house_temp.text = temp_value + " °C"
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
         logRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val value = snapshot.child("data").value.toString()
