@@ -50,7 +50,10 @@ class MainActivity : AppCompatActivity() {
                     // UI 配置
                     runOnUiThread {
                         Picasso.get().load(icon_url).into(ib_icon);
-                        btn_message.text = weather.get("description").asString
+                        btn_message.text   = weather.get("description").asString
+                        tv_temp.text       = String.format("%.1f °C", main.get("temp").asDouble - 273.15)
+                        tv_feels_temp.text = String.format("%.1f °C", main.get("feels_like").asDouble - 273.15)
+                        tv_humi.text       = main.get("humidity").toString() + " %"
                     }
                 }
 
