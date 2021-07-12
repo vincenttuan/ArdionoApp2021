@@ -1,5 +1,7 @@
 package com.study.app_tickets_firebase
 
+import java.io.Serializable
+
 data class Order(
     val userName: String,
     val key: String,

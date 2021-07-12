@@ -17,9 +17,16 @@ import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_qrcode.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class QRCodeActivity : AppCompatActivity() {
+    val database = Firebase.database
+    val myRef = database.getReference("ticketsStock")
+
     private val PERMISSION_REQUEST_CODE = 200
     private lateinit var context: Context
     private lateinit var codeScanner: CodeScanner
@@ -60,7 +67,16 @@ class QRCodeActivity : AppCompatActivity() {
                 val result_text = it.text
                 AlertDialog.Builder(context)
                     .setMessage("QRCode: $result_text")
-                    .setPositiveButton("使用", DialogInterface.OnClickListener { dialogInterface, i -> finish() })
+                    .setPositiveButton("使用", DialogInterface.OnClickListener { dialogInterface, i ->
+                        val path = result_text
+                        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                        val currentTimeString = sdf.format(Date())
+                        // 移除 orders
+                        myRef.child("orders/" + path).removeValue()
+                        // 新建 orders_history
+                        myRef.child("orders_history/" + path).setValue(currentTimeString)
+                        finish()
+                    })
                     .setNegativeButton("取消", DialogInterface.OnClickListener { dialogInterface, i -> finish() })
                     .create()
                     .show()
