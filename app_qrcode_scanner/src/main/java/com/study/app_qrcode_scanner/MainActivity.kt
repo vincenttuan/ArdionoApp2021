@@ -1,12 +1,14 @@
 package com.study.app_qrcode_scanner
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PatternMatcher
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
@@ -17,16 +19,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         context = this
 
-        checkPermission()
+        if(checkPermission()) {
+            // 正常執行程式
+        } else {
+            // 啟動動態核准對話框
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.CAMERA),
+                PERMISSION_REQUEST_CODE)
+
+        }
     }
 
+    // 使用者是否有同意使用權限(Ex:Camera)
     private fun checkPermission(): Boolean {
         val check = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
         val result = (check == PackageManager.PERMISSION_GRANTED)
         if(result) {
+            title = "Permission is OK"
             Toast.makeText(context, "Permission is OK", Toast.LENGTH_SHORT).show()
             return true
         } else {
+            title = "Permission is not granted"
             Toast.makeText(context, "Permission is not granted", Toast.LENGTH_SHORT).show()
             return false
         }
