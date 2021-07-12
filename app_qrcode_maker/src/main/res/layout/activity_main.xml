@@ -17,6 +17,7 @@
 
     <Button
         android:id="@+id/bt_submit"
+        android:onClick="generate"
         android:text="Generate"
         android:textSize="20dp"
         android:layout_margin="10dp"
