@@ -1,12 +1,14 @@
 package com.study.app_tickets_firebase
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NavUtils
@@ -18,6 +20,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.qrcode.QRCodeWriter
 import kotlinx.android.synthetic.main.activity_order_list.*
 import kotlinx.android.synthetic.main.order.*
 
@@ -114,12 +118,13 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
 
     override fun onItemClickListener(order: Order) {
         val key = order.key
+        val userName = order.userName
         val alert = AlertDialog.Builder(context)
-        alert.setTitle("退票")
-        alert.setMessage("$key 是否要退票 ?")
-        alert.setPositiveButton("是") { dialog, which ->
+        alert.setTitle("票券處置")
+        alert.setMessage("票券: ${userName} [ $key ]")
+        alert.setPositiveButton("退票") { dialog, which ->
             // 刪除訂單記錄
-            myRef.child("orders/" + order.userName + "/" + key).removeValue()
+            myRef.child("orders/" + userName + "/" + key).removeValue()
             // 票數加回
             // 從 order.allTickets 加回到 firebase's totalAmount 欄位中
             // addListenerForSingleValueEvent 監聽單一欄位資料
@@ -132,8 +137,27 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
 
                 }
             })
-
-
+        }
+        alert.setNeutralButton("ORCode") { dialog, which ->
+            // 產生 QRCode
+            val encodedText = userName + "/" + key
+            val writer = QRCodeWriter()
+            val bitMatrix = writer.encode(encodedText, BarcodeFormat.QR_CODE, 512, 512)
+            val width = bitMatrix.width
+            val height = bitMatrix.height
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+            for (x in 0 until width) {
+                for (y in 0 until height) {
+                    bitmap.setPixel(x, y, if (bitMatrix.get(x, y)) Color.BLACK else Color.WHITE)
+                }
+            }
+            // 將 QRCode 顯示在 AlertDialog 中
+            val qrcodeImageView = ImageView(context)
+            qrcodeImageView.setImageBitmap(bitmap)
+            AlertDialog.Builder(context)
+                .setView(qrcodeImageView)
+                .create()
+                .show()
         }
         alert.setNegativeButton("否", null)
         alert.show()
