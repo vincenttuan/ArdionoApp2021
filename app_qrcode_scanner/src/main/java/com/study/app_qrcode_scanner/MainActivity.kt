@@ -2,6 +2,7 @@ package com.study.app_qrcode_scanner
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,12 @@ import android.os.PatternMatcher
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
+import com.budiyev.android.codescanner.DecodeCallback
+import com.budiyev.android.codescanner.ErrorCallback
+import com.budiyev.android.codescanner.ScanMode
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_CODE = 200
@@ -38,6 +44,48 @@ class MainActivity : AppCompatActivity() {
         // 正常執行程式
         title = "正常執行程式"
 
+        codeScanner = CodeScanner(context, scanner_view)
+        // 設定 Scanner 預設參數
+        codeScanner.camera = CodeScanner.CAMERA_BACK
+        codeScanner.formats = CodeScanner.ALL_FORMATS
+        codeScanner.autoFocusMode = AutoFocusMode.SAFE
+        codeScanner.scanMode = ScanMode.SINGLE
+        codeScanner.isAutoFocusEnabled = true
+        codeScanner.isFlashEnabled = false
+
+        // 解碼
+        codeScanner.decodeCallback = DecodeCallback {
+            runOnUiThread {
+                val result_text = it.text
+                AlertDialog.Builder(context)
+                    .setMessage("QRCode: $result_text")
+                    .create()
+                    .show()
+            }
+        }
+
+        // 錯誤
+        codeScanner.errorCallback = ErrorCallback {
+            runOnUiThread {
+                val result_message = it.message
+                AlertDialog.Builder(context)
+                    .setMessage("Error: $result_message")
+                    .create()
+                    .show()
+            }
+        }
+
+        codeScanner.startPreview()
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        try {
+            codeScanner.releaseResources()
+        } catch (e: Exception) {
+
+        }
     }
 
     override fun onRequestPermissionsResult(
