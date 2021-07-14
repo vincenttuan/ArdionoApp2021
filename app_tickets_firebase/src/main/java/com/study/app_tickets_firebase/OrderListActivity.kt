@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import kotlinx.android.synthetic.main.activity_order_list.*
@@ -140,7 +141,8 @@ class OrderListActivity : AppCompatActivity(), RecyclerViewAdapter.RowOnItemClic
         }
         alert.setNeutralButton("ORCode") { dialog, which ->
             // 產生 QRCode
-            val encodedText = userName + "/" + key
+            //val encodedText = userName + "/" + key
+            val encodedText = Gson().toJson(order).toString()
             val writer = QRCodeWriter()
             val bitMatrix = writer.encode(encodedText, BarcodeFormat.QR_CODE, 512, 512)
             val width = bitMatrix.width

@@ -19,6 +19,7 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_qrcode.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -68,13 +69,20 @@ class QRCodeActivity : AppCompatActivity() {
                 AlertDialog.Builder(context)
                     .setMessage("QRCode: $result_text")
                     .setPositiveButton("使用", DialogInterface.OnClickListener { dialogInterface, i ->
-                        val path = result_text
+                        val order = Gson().fromJson<Order>(result_text, Order::class.java)
+                        val path = order.userName + "/" + order.key
                         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                         val currentTimeString = sdf.format(Date())
                         // 移除 orders
                         myRef.child("orders/" + path).removeValue()
                         // 新建 orders_history
-                        myRef.child("orders_history/" + path).setValue(currentTimeString)
+                        myRef.child("orders_history/" + path + "/ts").setValue(currentTimeString)
+                        myRef.child("orders_history/" + path + "/key").setValue(order.key)
+                        myRef.child("orders_history/" + path + "/userName").setValue(order.userName)
+                        myRef.child("orders_history/" + path + "/allTickets").setValue(order.allTickets)
+                        myRef.child("orders_history/" + path + "/oneWay").setValue(order.oneWay)
+                        myRef.child("orders_history/" + path + "/roundTrip").setValue(order.roundTrip)
+                        myRef.child("orders_history/" + path + "/total").setValue(order.total)
                         finish()
                     })
                     .setNegativeButton("取消", DialogInterface.OnClickListener { dialogInterface, i -> finish() })
